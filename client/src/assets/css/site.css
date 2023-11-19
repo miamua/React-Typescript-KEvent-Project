@@ -49,6 +49,10 @@ footer {
   background: #444;
   color: #fff;
   padding: 0.4rem;
+  margin-top: auto;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .container {

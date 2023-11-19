@@ -62,7 +62,6 @@ app.get("/api/ticket/:id", (req, res) => {
 // POST endpoint to create a new ticket
 app.post("/api/tickets", (req, res) => {
   const newTicket = req.body;
-  console.log(newTicket);
   saveTicket(newTicket);
 
   // After processing, you might want to send a response

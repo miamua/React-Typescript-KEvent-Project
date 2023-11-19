@@ -44,7 +44,7 @@ const PerformancesPage = () => {
     content = (
       <section className="artist-gallery">
         {performances.map((performance) => (
-          <div key={performance.id}>
+          <div key={performance.id} className="picDiv">
             <Performer
               imgUrl={performance.imgUrl}
               group={performance.group}

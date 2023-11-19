@@ -39,3 +39,16 @@ button {
 button:hover {
   background-color: #45a049;
 }
+
+.ticketDiv {
+  background-color: white;
+  color: black;
+  max-width: 70%;
+  margin: auto;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.ticketForm {
+  margin-top: 20px;
+}

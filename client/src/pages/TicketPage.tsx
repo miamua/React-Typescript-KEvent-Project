@@ -6,7 +6,6 @@ const TicketPage = () => {
     <main>
       <article>
         <section id="buying-form">
-          <h1 className="page-title">Buy Ticket</h1>
           <BuyTicketForm />
         </section>
       </article>

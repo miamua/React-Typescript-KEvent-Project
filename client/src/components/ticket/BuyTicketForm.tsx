@@ -1,14 +1,26 @@
-import { type FormEvent, useRef, useState, useEffect } from "react";
-import { get, post } from "../../utilities/httpClient";
+import { type FormEvent, useRef, useState } from "react";
+import { post } from "../../utilities/httpClient";
 import { ITicketResponseType } from "../../utilities/ITicketResponseType";
 
 type Customer = {
-  id: unknown;
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
   ticketType: string;
   phoneNumber: string;
+};
+
+const getHighestTicketId = async () => {
+  let highestId = 0;
+  const data = await fetch("http://localhost:3000/api/tickets");
+  const tickets = await data.json();
+  tickets.data.forEach((ticket: { id: number }) => {
+    if (ticket.id > highestId) {
+      highestId = ticket.id;
+    }
+  });
+  return highestId + 1;
 };
 
 const BuyTicketForm = () => {
@@ -17,27 +29,31 @@ const BuyTicketForm = () => {
   const email = useRef<HTMLInputElement>(null);
   const ticketType = useRef<HTMLSelectElement>(null);
   const phoneNumber = useRef<HTMLInputElement>(null);
+  const [ticketInfo, setTicketInfo] = useState<Customer | null>(null);
 
-  const [customerIdCounter, setCustomerIdCounter] = useState(1);
+  const clearFormFields = () => {
+    if (firstName.current) firstName.current.value = "";
+    if (lastName.current) lastName.current.value = "";
+    if (email.current) email.current.value = "";
+    if (ticketType.current) ticketType.current.value = "general";
+    if (phoneNumber.current) phoneNumber.current.value = "";
+  };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    const highestId = await getHighestTicketId();
     const customer: Customer = {
-      id: customerIdCounter,
+      id: highestId,
       firstName: firstName.current!.value,
       lastName: lastName.current!.value,
       email: email.current!.value,
       ticketType: ticketType.current!.value,
       phoneNumber: phoneNumber.current!.value,
     };
-    setCustomerIdCounter((prevCounter) => prevCounter + 1);
-
-    event.currentTarget.reset();
     //Informationen skickas till vår database eller
     //till mottagaren via ett mejl api
-    console.log(customer);
     postTicket(customer);
+    clearFormFields();
   };
 
   const postTicket = async (customer: object) => {
@@ -46,52 +62,75 @@ const BuyTicketForm = () => {
         "http://localhost:3000/api/tickets",
         customer
       );
+      setTicketInfo(customer as Customer);
       console.log("API Response:", result);
     } catch (error) {
-      console.error("API Error:", error.message);
+      console.error("API Error:", error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="ticketType">Select Ticket Type:</label>
-      <select ref={ticketType} id="ticketType" name="ticketType">
-        <option value="general">General Admission</option>
-        <option value="vip">VIP</option>
-      </select>
+    <div>
+      {ticketInfo ? (
+        <div>
+          <h1 className="page-title">Your Ticket</h1>
+          <div className="ticketDiv">
+            <p>
+              Name: {ticketInfo.firstName} {ticketInfo.lastName}
+            </p>
+            <p>Email: {ticketInfo.email}</p>
+            <p>Ticket Type: {ticketInfo.ticketType}</p>
+            <p>Phone Number: {ticketInfo.phoneNumber}</p>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <h1 className="page-title">Buy Ticket</h1>
 
-      <label htmlFor="firstName">Full Name:</label>
-      <input
-        ref={firstName}
-        type="text"
-        id="fullName"
-        name="fullName"
-        required
-      />
+          <form className="ticketForm" onSubmit={handleSubmit}>
+            <label htmlFor="ticketType">Select Ticket Type:</label>
+            <select ref={ticketType} id="ticketType" name="ticketType">
+              <option value="General Admission">
+                General Admission - 500kr
+              </option>
+              <option value="VIP">VIP - 1200kr</option>
+            </select>
 
-      <label htmlFor="lastName">Full Name:</label>
-      <input
-        ref={lastName}
-        type="text"
-        id="fullName"
-        name="fullName"
-        required
-      />
+            <label htmlFor="firstName">First Name:</label>
+            <input
+              ref={firstName}
+              type="text"
+              id="firstName"
+              name="firstName"
+              required
+            />
 
-      <label htmlFor="email">Email:</label>
-      <input ref={email} type="email" id="email" name="email" required />
+            <label htmlFor="lastName">Last Name:</label>
+            <input
+              ref={lastName}
+              type="text"
+              id="lastName"
+              name="lastName"
+              required
+            />
 
-      <label htmlFor="phoneNumber">Phone Number:</label>
-      <input
-        ref={phoneNumber}
-        type="tel"
-        id="phoneNumber"
-        name="phoneNumber"
-        required
-      />
+            <label htmlFor="email">Email:</label>
+            <input ref={email} type="email" id="email" name="email" required />
 
-      <button type="submit">Buy Ticket</button>
-    </form>
+            <label htmlFor="phoneNumber">Phone Number:</label>
+            <input
+              ref={phoneNumber}
+              type="tel"
+              id="phoneNumber"
+              name="phoneNumber"
+              required
+            />
+
+            <button type="submit">Buy Ticket</button>
+          </form>
+        </div>
+      )}
+    </div>
   );
 };
 

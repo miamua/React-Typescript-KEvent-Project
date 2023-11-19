@@ -15,14 +15,24 @@ const PerformanceDetails: FC<PerformanceDetailProps> = ({ performance }) => {
         <img src={performance.imgUrl} alt={performance.group}></img>
         <div className="title">{performance.group}</div>
         <div>
-          <span>Group members: {performance.members.join(", ")}</span>
-          <span>Show time: {firstSchedule.time}</span>
-          <span>Songs: {firstSchedule.songs.join(", ")}</span>
+          <div>
+            <b>Show time:</b> {firstSchedule.time}
+          </div>
+          <div>
+            <b>Hall:</b>
+            {performance.hall}
+          </div>
+        </div>
+
+        <div>
+          <b>Songs:</b> {firstSchedule.songs.join(", ")}
         </div>
 
         <div className="description">
-          <p>Description</p>
-          <p>Add Description here</p>
+          <p>
+            <b>Group members:</b> {performance.members.join(", ")}
+          </p>
+          <p>{performance.description}</p>
         </div>
       </div>
     </article>
