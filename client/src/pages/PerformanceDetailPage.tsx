@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { IPerformaceDetail } from "../components/performace/IPerformanceDetail";
+import { IPerformanceDetail } from "../components/performace/IPerformanceDetail";
 import { get } from "../utilities/httpClient";
 import { useParams } from "react-router-dom";
 import { IPerformanceDetailResponseType } from "../utilities/IPerformaceDetailResponseType";
@@ -16,7 +16,7 @@ type PerformaceResponseType = {
 };*/
 
 const PerformanceDetail = () => {
-  const [performance, setPerformance] = useState<IPerformaceDetail>();
+  const [performance, setPerformance] = useState<IPerformanceDetail>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>();
 

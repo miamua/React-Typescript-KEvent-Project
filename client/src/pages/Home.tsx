@@ -13,8 +13,8 @@ const HomePage = () => {
             quis id quaerat repudiandae architecto, dolorem repellat sint
             assumenda similique nostrum? Blanditiis, quam quis.
           </p>
-          <a href="/about" className="btn">
-            Läs mer om oss
+          <a href="/ticket" className="btn">
+            BUY TICKET HERE
           </a>
         </section>
       </article>

@@ -1,4 +1,4 @@
-import { IPerformers, ISchedule } from "./IPerformers";
+import { IPerformers } from "./IPerformers";
 
 export interface IPerformanceDetail extends IPerformers {
   members: string[];

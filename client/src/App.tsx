@@ -10,6 +10,7 @@ import Footer from "./components/ui/Footer";
 import PerformancesPage from "./pages/PerformancesPage";
 
 import PerformanceDetailPage from "./pages/PerformanceDetailPage";
+import TicketPage from "./pages/TicketPage";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/performances" element={<PerformancesPage />} />
           <Route path="/performance/:id" element={<PerformanceDetailPage />} />
+          <Route path="/ticket" element={<TicketPage />} />
         </Routes>
       </BrowserRouter>
       <Footer text="K-pop Entertainment &copy; 2023" />
