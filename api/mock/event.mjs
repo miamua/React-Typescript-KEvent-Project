@@ -154,7 +154,11 @@ const EVENT = [
 ];
 
 export const eventDetail = () => {
-  return EVENT;
+  return EVENT[0];
+};
+
+export const getAllSponsors = () => {
+  return EVENT[0].sponsorship;
 };
 
 export const listAllActivities = () => {

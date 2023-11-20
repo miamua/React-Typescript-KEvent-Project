@@ -7,6 +7,7 @@ import {
   eventDetail,
   getPerformance,
   listAllActivities,
+  getAllSponsors,
 } from "./mock/event.mjs";
 import { getTicketDetails, listAllTickets } from "./mock/listTickets.mjs";
 
@@ -14,6 +15,15 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+
+app.get("/api/sponsors", (req, res) => {
+  const sponsors = getAllSponsors();
+  res.status(200).json({
+    status: "Sucess",
+    statusCode: 200,
+    data: sponsors,
+  });
+});
 
 app.get("/api/performances", (req, res) => {
   const activities = listAllActivities();

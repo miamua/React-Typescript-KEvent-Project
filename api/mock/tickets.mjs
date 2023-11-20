@@ -38,5 +38,13 @@ export default [
     "email": "nanthiporn.aumaim@gmail.com",
     "ticketType": "General Admission",
     "phoneNumber": "2415231231"
+  },
+  {
+    "id": 91,
+    "firstName": "Booboo",
+    "lastName": "Booboo",
+    "email": "nanthiporn.aumaim@gmail.com",
+    "ticketType": "VIP",
+    "phoneNumber": "2415231231"
   }
 ];
