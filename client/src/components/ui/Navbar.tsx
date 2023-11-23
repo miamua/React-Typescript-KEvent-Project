@@ -24,25 +24,17 @@ const Navbar = () => {
             <li className="menu-item">
               <NavLink
                 className={({ isActive }) => (isActive ? "active" : "")}
-                to="/"
+                to="/performances"
               >
-                Start
+                Performances
               </NavLink>
             </li>
             <li className="menu-item">
               <NavLink
                 className={({ isActive }) => (isActive ? "active" : "")}
-                to="/about"
+                to="/ticket"
               >
-                Om Oss
-              </NavLink>
-            </li>
-            <li className="menu-item">
-              <NavLink
-                className={({ isActive }) => (isActive ? "active" : "")}
-                to="/contact"
-              >
-                Kontakta Oss
+                Ticket
               </NavLink>
             </li>
           </ul>

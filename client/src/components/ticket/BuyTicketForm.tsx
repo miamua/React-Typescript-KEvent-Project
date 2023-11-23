@@ -1,6 +1,8 @@
 import { type FormEvent, useRef, useState } from "react";
 import { post } from "../../utilities/httpClient";
 import { ITicketResponseType } from "../../utilities/ITicketResponseType";
+import Header from "../ui/Header";
+import QRCode from "qrcode.react";
 
 type Customer = {
   id: number;
@@ -30,6 +32,7 @@ const BuyTicketForm = () => {
   const ticketType = useRef<HTMLSelectElement>(null);
   const phoneNumber = useRef<HTMLInputElement>(null);
   const [ticketInfo, setTicketInfo] = useState<Customer | null>(null);
+  const [qrCodeData, setQRCodeData] = useState<string | null>(null);
 
   const clearFormFields = () => {
     if (firstName.current) firstName.current.value = "";
@@ -50,6 +53,9 @@ const BuyTicketForm = () => {
       ticketType: ticketType.current!.value,
       phoneNumber: phoneNumber.current!.value,
     };
+
+    const customerData = JSON.stringify(customer);
+    setQRCodeData(customerData);
     //Informationen skickas till vår database eller
     //till mottagaren via ett mejl api
     postTicket(customer);
@@ -73,14 +79,21 @@ const BuyTicketForm = () => {
     <div>
       {ticketInfo ? (
         <div>
-          <h1 className="page-title">Your Ticket</h1>
+          <Header>
+            <h2>Your Ticket</h2>
+          </Header>
+
           <div className="ticketDiv">
-            <p>
-              Name: {ticketInfo.firstName} {ticketInfo.lastName}
-            </p>
-            <p>Email: {ticketInfo.email}</p>
-            <p>Ticket Type: {ticketInfo.ticketType}</p>
-            <p>Phone Number: {ticketInfo.phoneNumber}</p>
+            <section>
+              {" "}
+              <p>
+                Name: {ticketInfo.firstName} {ticketInfo.lastName}
+              </p>
+              <p>Email: {ticketInfo.email}</p>
+              <p>Ticket Type: {ticketInfo.ticketType}</p>
+              <p>Phone Number: {ticketInfo.phoneNumber}</p>
+            </section>
+            <section>{qrCodeData && <QRCode value={qrCodeData} />}</section>
           </div>
         </div>
       ) : (

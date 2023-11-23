@@ -7,5 +7,3 @@ export type PerformanceResponseType = {
   items?: number;
   data: IPerformers[] | IPerformanceDetail;
 };
-
-///Dont use?????? can remove???

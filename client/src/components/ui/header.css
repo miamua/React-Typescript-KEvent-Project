@@ -4,6 +4,7 @@
   border: solid 1px var(--secondary-color);
   text-align: center;
   color: var(--secondary-color);
-  background-color: var(--header-color);
+  background-color: white;
   box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
 }

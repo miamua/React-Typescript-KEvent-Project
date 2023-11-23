@@ -1,9 +1,5 @@
 /* Uitlities classes */
 
-.page-title {
-  color: var(--secondary-color);
-}
-
 .bg-dark {
   background: var(--text-color-dark);
   color: var(--text-color-light);

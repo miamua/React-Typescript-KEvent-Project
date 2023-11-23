@@ -4,7 +4,7 @@ import { ISponsor } from "../components/kpopEvent/ISponsor";
 import { get } from "../utilities/httpClient";
 import Progress from "../components/ui/Progress";
 import ErrorMessage from "../components/ui/ErrorMessage";
-import { SponsorAndContactResponseType } from "../utilities/TryResponse";
+import { SponsorAndContactResponseType } from "../utilities/SponsorAndContactResponseType";
 import { IContact } from "../components/kpopEvent/IContact";
 
 const HomePage = () => {
@@ -35,16 +35,33 @@ const HomePage = () => {
 
   let content: ReactNode;
 
-  if (sponsors) {
+  if (sponsors && contactInfo) {
     content = (
-      <section className="">
-        <div className="mainSponsor">{sponsors.sponsorship.main_sponsor}</div>
-        <div className="supporting_sponsors">
-          {sponsors.sponsorship.supporting_sponsors.map((sponsor) => (
-            <div key={sponsor}>{sponsor} </div>
-          ))}
-        </div>
-      </section>
+      <article className="feature-area">
+        <section className="box bg-light" id="sponsor">
+          <i className="fa-solid fa-users"></i>
+          <h3>
+            <b>Sponsor</b>
+          </h3>
+          <div className="mainSponsor">
+            {sponsors?.sponsorship.main_sponsor}
+          </div>
+          <div className="supporting_sponsors">
+            {sponsors?.sponsorship.supporting_sponsors.map((sponsor) => (
+              <div key={sponsor}>{sponsor} </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="box bg-primary" id="contact">
+          <i className="fa-regular fa-address-card"></i>
+          <h3>
+            <b>Contact Us</b>
+          </h3>
+          <p>{contactInfo?.contact_info.organizer_email}</p>
+          <p>{contactInfo?.contact_info.organizer_phone}</p>
+        </section>
+      </article>
     );
   }
 
@@ -59,49 +76,34 @@ const HomePage = () => {
     <main>
       <article className="main-area">
         <section className="container">
-          <h1 className="page-title">Välkommen</h1>
+          <h1 className="page-title">K-pop Extravaganza 2023</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
-            alias rerum beatae mollitia magni provident ullam exercitationem
-            dicta excepturi vitae! Quae cumque nesciunt temporibus libero nobis
-            quis id quaerat repudiandae architecto, dolorem repellat sint
-            assumenda similique nostrum? Blanditiis, quam quis.
+            🌟 Get ready for the ultimate K-pop spectacle at{" "}
+            <strong>K-pop Extravaganza 2023</strong>! Join us on{" "}
+            <strong> 16-17 December 2023</strong> at{" "}
+            <strong>K-pop Arena, Seoul, South Korea</strong> for an electrifying
+            night featuring chart-topping sensations like Blackpink and more!
           </p>
+          <p>
+            🎤 Experience the magic with dynamic group performances,
+            soul-stirring solos, and immerse yourself in K-pop culture with
+            interactive fan zones and exclusive merchandise. Whether you're a
+            die-hard fan or a newcomer, <strong>K-pop Extravaganza 2023</strong>{" "}
+            promises an unforgettable night of music, dance, and camaraderie.
+          </p>
+          <p>
+            Secure your tickets now and let the countdown to an unparalleled
+            K-pop experience begin! 🎉✨
+          </p>
+          <a href="/performances" className="btn btn-light">
+            Performances
+          </a>
           <a href="/ticket" className="btn">
             BUY TICKET HERE
           </a>
         </section>
       </article>
-      <article className="info-area">
-        <section className="display-image"></section>
-        <section className="info bg-dark">
-          <h3 className="page-title">Westcoast Cars</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium
-            explicabo deserunt qui dicta eaque quae libero illum debitis
-            mollitia, molestias eveniet consequuntur provident rem a blanditiis
-            recusandae ipsa. Maiores dolor laudantium assumenda qui, soluta at
-            rem, incidunt eius aspernatur animi autem iure neque accusamus ut
-            vero architecto consectetur illo ducimus?
-          </p>
-          <a href="/performances" className="btn btn-light">
-            Performances
-          </a>
-        </section>
-      </article>
-      <article className="feature-area">
-        <section id="sponsor" className="box bg-light">
-          <i className="fa-solid fa-screwdriver-wrench"></i>
-          <h3>Sponsors</h3>
-          {content}
-        </section>
-        <section id="leasing" className="box bg-primary">
-          <i className="fa-regular fa-car-building"></i>
-          <h3>Contact Us</h3>
-          <p>{contactInfo?.contact_info.organizer_email}</p>
-          <p>{contactInfo?.contact_info.organizer_phone}</p>
-        </section>
-      </article>
+      {content}
     </main>
   );
 };

@@ -1,8 +1,9 @@
 .main-area {
-  background: url("../assets/images/landing.jpg") no-repeat center center/cover;
-  height: 600px;
+  background: url("https://www.rollingstone.com/wp-content/uploads/2023/07/kpop100-list-taegeuk.jpg?w=1581&h=1054&crop=1")
+    no-repeat center center/cover;
   padding: 2rem 4rem;
   text-align: center;
+  display: flex;
 }
 
 .main-area > section {
@@ -19,60 +20,23 @@
 
 .main-area p {
   padding-bottom: 1.25rem;
-}
-
-.info-area .display-image {
-  display: none;
-}
-
-.info-area .info {
-  min-height: 300px;
-  padding-top: 2rem;
-  text-align: center;
-}
-
-.info-area .info h3 {
-  font-size: 1.5rem;
-}
-
-.info-area .info p {
-  padding-bottom: 1rem;
-}
-
-.info-area .info a {
-  margin-bottom: 1rem;
+  color: var(--text-color-light);
 }
 
 @media (min-width: 768px) {
   .main-area {
-    height: 600px;
+    height: 80vh;
     width: 100%;
     padding: 2rem 4rem;
     text-align: center;
   }
 
   .main-area > section {
-    background: var(--primary-color);
+    background: #6575a8;
     color: var(--text-color-light);
     padding: 1rem;
     opacity: 0.9;
     border-radius: 5px;
-  }
-
-  .info-area {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .info-area .display-image {
-    display: block;
-    background: url("../assets/images/display-2.jpg") no-repeat center
-      center/cover;
-  }
-
-  .info-area .info {
-    min-height: 400px;
-    padding-top: 3rem;
   }
 
   .feature-area {
@@ -81,9 +45,18 @@
   }
 }
 
+#contact {
+  background-color: #6575a8;
+  color: white;
+}
+
+#contact p {
+  color: white;
+}
+
 @media (min-width: 1200px) {
   .main-area {
-    height: 800px;
+    height: 80vh;
     padding: 2rem 4rem;
     text-align: center;
   }

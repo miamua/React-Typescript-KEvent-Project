@@ -16,6 +16,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+//All sponsor
 app.get("/api/sponsors", (req, res) => {
   const sponsors = getAllSponsors();
   res.status(200).json({
@@ -25,6 +26,7 @@ app.get("/api/sponsors", (req, res) => {
   });
 });
 
+//All Performances
 app.get("/api/performances", (req, res) => {
   const activities = listAllActivities();
   res.status(200).json({
@@ -35,6 +37,15 @@ app.get("/api/performances", (req, res) => {
   });
 });
 
+//Specific performance
+app.get("/api/performance/:id", (req, res) => {
+  const performance = getPerformance(+req.params.id);
+  res
+    .status(200)
+    .json({ status: "Success", statusCode: 200, data: performance ?? null });
+});
+
+//Event details
 app.get("/api/event", (req, res) => {
   const event = eventDetail();
   res.status(200).json({
@@ -45,13 +56,7 @@ app.get("/api/event", (req, res) => {
   });
 });
 
-app.get("/api/performance/:id", (req, res) => {
-  const performance = getPerformance(+req.params.id);
-  res
-    .status(200)
-    .json({ status: "Success", statusCode: 200, data: performance ?? null });
-});
-
+//All tickets
 app.get("/api/tickets", (req, res) => {
   const tickets = listAllTickets();
   res.status(200).json({
@@ -62,19 +67,11 @@ app.get("/api/tickets", (req, res) => {
   });
 });
 
-app.get("/api/ticket/:id", (req, res) => {
-  const ticket = getTicketDetails(+req.params.id);
-  res
-    .status(200)
-    .json({ status: "Success", statusCode: 200, data: ticket ?? null });
-});
-
 // POST endpoint to create a new ticket
 app.post("/api/tickets", (req, res) => {
   const newTicket = req.body;
   saveTicket(newTicket);
 
-  // After processing, you might want to send a response
   res.status(201).json({
     status: "Success",
     statusCode: 201,
@@ -85,7 +82,7 @@ app.post("/api/tickets", (req, res) => {
 function saveTicket(newTicket) {
   const existingTickets = listAllTickets();
 
-  // Add the new ticket to the existing list
+  // Add the new ticket to the list
   existingTickets.push(newTicket);
 
   // Convert the array to a string and save it to tickets.mjs
@@ -96,6 +93,14 @@ function saveTicket(newTicket) {
   )};`;
   fs.writeFileSync("./mock/tickets.mjs", ticketsString, "utf-8");
 }
+
+//Specific ticket
+app.get("/api/ticket/:id", (req, res) => {
+  const ticket = getTicketDetails(+req.params.id);
+  res
+    .status(200)
+    .json({ status: "Success", statusCode: 200, data: ticket ?? null });
+});
 
 const port = 3000;
 app.listen(port, () =>

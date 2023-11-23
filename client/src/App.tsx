@@ -4,11 +4,8 @@ import "./assets/css/utilities.css";
 import "./components/performace/performace.css";
 import Navbar from "./components/ui/Navbar";
 import HomePage from "./pages/Home";
-import AboutPage from "./pages/About";
-import ContactPage from "./pages/Contact";
 import Footer from "./components/ui/Footer";
 import PerformancesPage from "./pages/PerformancesPage";
-
 import PerformanceDetailPage from "./pages/PerformanceDetailPage";
 import TicketPage from "./pages/TicketPage";
 
@@ -19,8 +16,6 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
           <Route path="/performances" element={<PerformancesPage />} />
           <Route path="/performance/:id" element={<PerformanceDetailPage />} />
           <Route path="/ticket" element={<TicketPage />} />
